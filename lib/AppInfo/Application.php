@@ -34,6 +34,7 @@ use OCA\Mail\Contracts\ITrustedSenderService;
 use OCA\Mail\Contracts\IUserPreferences;
 use OCA\Mail\Dashboard\ImportantMailWidget;
 use OCA\Mail\Dashboard\UnreadMailWidget;
+use OCA\Mail\Dashboard\ZeroInboxWidget;
 use OCA\Mail\Events\BeforeMessageSentEvent;
 use OCA\Mail\Events\DraftSavedEvent;
 use OCA\Mail\Events\MailboxesSynchronizedEvent;
@@ -124,6 +125,7 @@ class Application extends App implements IBootstrap {
 
 		$context->registerDashboardWidget(ImportantMailWidget::class);
 		$context->registerDashboardWidget(UnreadMailWidget::class);
+		$context->registerDashboardWidget(ZeroInboxWidget::class);
 		$context->registerSearchProvider(Provider::class);
 
 		// bypass Horde Translation system

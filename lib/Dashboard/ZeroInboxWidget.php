@@ -3,9 +3,8 @@
 declare(strict_types=1);
 
 /**
- * @copyright Copyright (c) 2020 Julius Härtl <jus@bitgrid.net>
+ * @copyright Copyright (c) 2020 Richard Steinmetz <richard@steinmetz.cloud>
  *
- * @author Julius Härtl <jus@bitgrid.net>
  * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
@@ -25,28 +24,27 @@ declare(strict_types=1);
  *
  */
 
+namespace OCA\Mail\Dashboard;
 
+class ZeroInboxWidget extends MailWidget {
+  /**
+   * @inheritDoc
+   */
+  public function getId(): string {
+    return 'mail-zero-inbox';
+  }
 
-namespace OCA\Mail\Listener;
+  /**
+   * @inheritDoc
+   */
+  public function getTitle(): string {
+    return $this->l10n->t('Zero Inbox');
+  }
 
-use OCA\Mail\Dashboard\ImportantMailWidget;
-use OCA\Mail\Dashboard\UnreadMailWidget;
-use OCA\Mail\Dashboard\ZeroInboxWidget;
-use OCP\Dashboard\RegisterWidgetEvent;
-use OCP\EventDispatcher\Event;
-use OCP\EventDispatcher\IEventListener;
-
-class DashboardPanelListener implements IEventListener {
-	/**
-	 * @inheritDoc
-	 */
-	public function handle(Event $event): void {
-		if (!($event instanceof RegisterWidgetEvent)) {
-			return;
-		}
-
-		$event->registerWidget(ImportantMailWidget::class);
-		$event->registerWidget(UnreadMailWidget::class);
-    $event->registerWidget(ZeroInboxWidget::class);
-	}
+  /**
+   * @inheritDoc
+   */
+  public function getSearchFilter(): string {
+    return 'is:unread';
+  }
 }
